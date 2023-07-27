@@ -140,22 +140,42 @@
             const geometry = new THREE.PlaneGeometry(1, 0.55);
             const material = new THREE.MeshBasicMaterial({ color: 0x00ffff, transparent: true, opacity: 0.5 });
             const plane = new THREE.Mesh(geometry, material);
+            anchor.group.add(plane);
 
             const gltfLoader = new GLTFLoader();
-            gltfLoader.load("./static/Map.gltf", (gltf) => {
-                console.log("gltf: ", gltf);
-                // const gltfScene = gltf.scene;
-                // scene.add(gltfScene);
+            gltfLoader.load(
+                "https://cdn.jsdelivr.net/gh/siouxcitizen/3DModel@a1c2e47550ca20de421f6d779229f66efab07830/yuusha.gltf",
+                (gltf) => {
+                    console.log("gltf: ", gltf);
+                    // const gltfScene = gltf.scene;
+                    // scene.add(gltfScene);
 
-                scene.add(gltf.scene);
-                // gltf.animations; // Array<THREE.AnimationClip>
-                // gltf.scene; // THREE.Group
-                // gltf.scenes; // Array<THREE.Group>
-                // gltf.cameras; // Array<THREE.Camera>
-                // gltf.asset; // Object
-                // gltfScene.scale.set(0.1, 0.1, 0.1);
-                anchor.group.add(gltf);
-            });
+                    scene.add(gltf.scene);
+                    // gltf.animations; // Array<THREE.AnimationClip>
+                    // gltf.scene; // THREE.Group
+                    // gltf.scenes; // Array<THREE.Group>
+                    // gltf.cameras; // Array<THREE.Camera>
+                    // gltf.asset; // Object
+                    // gltfScene.scale.set(0.1, 0.1, 0.1);
+                },
+                function (xhr) {
+                    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+                },
+                // called when loading has errors
+                function (error) {
+                    console.log("An error happened");
+                }
+            );
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                var delta = clock.getDelta();
+
+                if (mixer) mixer.update(delta);
+
+                renderer.render(scene, camera);
+            }
 
             const start = async () => {
                 await mindarThree.start();
