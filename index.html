@@ -142,21 +142,21 @@
             const plane = new THREE.Mesh(geometry, material);
 
             const gltfLoader = new GLTFLoader();
-            gltfLoader.load("https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/face-tracking/assets/glasses/scene.gltf", (gltf) => {
+            gltfLoader.load("./static/Map.gltf", (gltf) => {
                 console.log("gltf: ", gltf);
                 // const gltfScene = gltf.scene;
                 // scene.add(gltfScene);
 
                 scene.add(gltf.scene);
-                gltf.animations; // Array<THREE.AnimationClip>
-                gltf.scene; // THREE.Group
-                gltf.scenes; // Array<THREE.Group>
-                gltf.cameras; // Array<THREE.Camera>
-                gltf.asset; // Object
+                // gltf.animations; // Array<THREE.AnimationClip>
+                // gltf.scene; // THREE.Group
+                // gltf.scenes; // Array<THREE.Group>
+                // gltf.cameras; // Array<THREE.Camera>
+                // gltf.asset; // Object
                 // gltfScene.scale.set(0.1, 0.1, 0.1);
+                anchor.group.add(gltf);
             });
 
-            anchor.group.add(plane);
             const start = async () => {
                 await mindarThree.start();
                 renderer.setAnimationLoop(() => {
@@ -165,7 +165,13 @@
             };
             const startButton = document.querySelector("#startButton");
             startButton.addEventListener("click", () => {
-                start();
+                start()
+                    .then((res) => {
+                        console.log("start success!", res);
+                    })
+                    .catch((err) => {
+                        console.log("start failure!", err);
+                    });
             });
             stopButton.addEventListener("click", () => {
                 mindarThree.stop();
