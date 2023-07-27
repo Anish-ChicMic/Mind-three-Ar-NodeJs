@@ -28,6 +28,7 @@
 
             const gltfLoader = new GLTFLoader();
             gltfLoader.load("./static/model.glb", (gltf) => {
+                console.log("gltf: ", gltf);
                 const gltfScene = gltf.scene;
                 scene.add(gltfScene);
             });
@@ -40,7 +41,13 @@
             };
             const startButton = document.querySelector("#startButton");
             startButton.addEventListener("click", () => {
-                start();
+                start()
+                    .then((res) => {
+                        console.log("start success!", res);
+                    })
+                    .catch((err) => {
+                        console.log("start failure!", err);
+                    });
             });
             stopButton.addEventListener("click", () => {
                 mindarThree.stop();
