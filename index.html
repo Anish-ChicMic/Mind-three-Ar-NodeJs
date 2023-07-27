@@ -141,13 +141,13 @@
             const material = new THREE.MeshBasicMaterial({ color: 0x00ffff, transparent: true, opacity: 0.5 });
             const plane = new THREE.Mesh(geometry, material);
 
-            const gltfLoader = new GLTFLoader();
-            gltfLoader.load("https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/face-tracking/assets/glasses/scene.gltf", (gltf) => {
-                console.log("gltf: ", gltf);
-                const gltfScene = gltf.scene;
-                gltfScene.scale.set(0.1, 0.1, 0.1);
-                scene.add(gltfScene);
-            });
+            // const gltfLoader = new GLTFLoader();
+            // gltfLoader.load("https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/face-tracking/assets/glasses/scene.gltf", (gltf) => {
+            //     console.log("gltf: ", gltf);
+            //     const gltfScene = gltf.scene;
+            //     gltfScene.scale.set(0.1, 0.1, 0.1);
+            //     scene.add(gltfScene);
+            // });
 
             anchor.group.add(plane);
             const start = async () => {
