@@ -23,7 +23,6 @@
             const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
             scene.add(light);
             const faceMesh = mindarThree.addFaceMesh();
-            mindarThree.switchCamera();
             const texture = new THREE.TextureLoader().load("./assets/faceMaskMesh.png");
             faceMesh.material.map = texture;
             faceMesh.material.transparent = true;
@@ -32,10 +31,11 @@
 
             // Camera Switch
             const btn = document.querySelector("button"); //Accessing button element using querySelector in JavaScript
-            btn.addEventListener("click", function () {
+            console.log("btn: ", btn);
+            btn.addEventListener("click", async () => {
                 //Using addEventListener for 'click' event
+                await mindarThree.switchCamera();
                 console.log("Camera Changed!");
-                name1.style.color = "blue"; //Changing the color of paragraph text to blue
                 btn.innerText = "Rear Camera"; //Changing the button text after clicking event
             });
 
