@@ -145,6 +145,7 @@
             gltfLoader.load("https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/face-tracking/assets/glasses/scene.gltf", (gltf) => {
                 console.log("gltf: ", gltf);
                 const gltfScene = gltf.scene;
+                gltfScene.scale.set(0.1, 0.1, 0.1);
                 scene.add(gltfScene);
             });
 
