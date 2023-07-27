@@ -19,15 +19,26 @@
             const mindarThree = new MindARThree({
                 container: document.querySelector("#container"),
             });
-            const { renderer, scene, camera } = mindarThree; 
+            const { renderer, scene, camera } = mindarThree;
             const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
             scene.add(light);
             const faceMesh = mindarThree.addFaceMesh();
-            const texture = new THREE.TextureLoader().load("./assets/public.jpeg");
+            mindarThree.switchCamera();
+            const texture = new THREE.TextureLoader().load("./assets/faceMaskMesh.png");
             faceMesh.material.map = texture;
             faceMesh.material.transparent = true;
             faceMesh.material.needsUpdate = true;
             scene.add(faceMesh);
+
+            // Camera Switch
+            const btn = document.querySelector("button"); //Accessing button element using querySelector in JavaScript
+            btn.addEventListener("click", function () {
+                //Using addEventListener for 'click' event
+                console.log("Camera Changed!");
+                name1.style.color = "blue"; //Changing the color of paragraph text to blue
+                btn.innerText = "Rear Camera"; //Changing the button text after clicking event
+            });
+
             const start = async () => {
                 await mindarThree.start();
                 renderer.setAnimationLoop(() => {
@@ -51,6 +62,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <button>Switch Camera</button>
         <div id="container"></div>
     </body>
 </html>
