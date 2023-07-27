@@ -142,7 +142,7 @@
             const plane = new THREE.Mesh(geometry, material);
 
             const gltfLoader = new GLTFLoader();
-            gltfLoader.load("./static/Map.gltf", (gltf) => {
+            gltfLoader.load("https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.2/examples/face-tracking/assets/glasses/scene.gltf", (gltf) => {
                 console.log("gltf: ", gltf);
                 const gltfScene = gltf.scene;
                 scene.add(gltfScene);
